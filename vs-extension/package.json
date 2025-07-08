@@ -1,0 +1,69 @@
+{
+  "name": "agent-connector",
+  "displayName": "AI Agent",
+  "description": "An AI agent that connects to a local LLM to perform coding tasks.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:agent-connector.runAgent",
+    "onView:coding-agent.chatView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agent-connector.runAgent",
+        "title": "Run Local AI Agent"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "coding-agent-sidebar",
+          "title": "AI Agent",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "coding-agent-sidebar": [
+        {
+          "id": "coding-agent.chatView",
+          "name": "Chat",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run build-webview",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "build-webview": "cd webview-ui && npm install && npm run build"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/node-fetch": "^2.6.12",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
